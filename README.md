@@ -13,7 +13,7 @@ REST API using Spring. Interaction database. Implementation CRUD (POST, GET, PUT
 <li><a href="https://github.com/skkovalenko/ToDoList/blob/master/src/main/java/main/controller/DefaultController.java">Default controller</a></li> 
 requests MyHost/   path and returns the <a href="https://github.com/skkovalenko/ToDoList/blob/master/src/main/resources/templates/index.html">index page</a> using spring-boot-starter-thymeleaf connected to maven
 <li><a href="https://github.com/skkovalenko/ToDoList/blob/master/src/main/java/main/controller/TodoController.java">Todo controller</a></li> 
-works with requests POST, GET, PUT, DELETE and interactions with database using <a href="">Todo repository</a> extends org.springframework.data.repository.CrudRepository'<'Integer, Todo'>'
+works with requests POST, GET, PUT, DELETE and interactions with database using <a href="">Todo repository</a> extends org.springframework.data.repository.CrudRepository'<'Todo, Integer'>'
 using spring-boot-starter-data-jpa connected to maven 
 </ul>
 
