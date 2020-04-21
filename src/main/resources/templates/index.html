@@ -8,6 +8,10 @@
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
+<div id="search-form">
+    <input id="search" type="text" name="search" placeholder="поиск по названию...">
+    <input id="submit" type="submit" name="submit" value="Найти">
+</div>
     <div id="todo-form">
         <form>
             <label>Название дела:
@@ -29,6 +33,9 @@
         <div class="todo-div" th:each="todo : ${todoList}" th:attr="id=${todo.id}">
             <a href="#" class="todo-link" th:attr="data-id=${todo.id}" th:text="${todo.name}"></a>
             <br>
+        </div>
+
+        <div id="button-to-return">
         </div>
     </div>
 </body>

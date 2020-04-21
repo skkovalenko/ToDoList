@@ -25,10 +25,17 @@ public class TodoController {
     @GetMapping("/todo-list/")
     public List<Todo> list(){
         Iterable<Todo> todoIterable = todoRepository.findAll();
-        ArrayList<Todo> todoList = new ArrayList<>();
+        List<Todo> todoList = new ArrayList<>();
         for(Todo todo : todoIterable){
             todoList.add(todo);
         }
+        return todoList;
+    }
+
+    @PostMapping("/todo-list/query={text}")
+    public List<Todo> getSearch(@PathVariable String text){
+        text = "%" + text + "%";
+        List<Todo> todoList = todoRepository.findAllByNameIsLike(text);
         return todoList;
     }
 
@@ -36,7 +43,6 @@ public class TodoController {
     public int add(Todo todo) {
         Todo newTodo = todoRepository.save(todo);
         return newTodo.getId();
-
     }
 
     @GetMapping("/todo-list/{id}")
@@ -48,7 +54,7 @@ public class TodoController {
         return ResponseEntity.ok(todoOptional.get());
     }
 
-    @PutMapping(value = "todo-list/{id}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PutMapping(value = "todo-list/{id}")
     public ResponseEntity<Todo> put(@RequestParam Map<String, String> mapParam, @PathVariable int id){
         Optional<Todo> todoOptional = todoRepository.findById(id);
         if(todoOptional.isEmpty()){
@@ -69,4 +75,5 @@ public class TodoController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
+
 }

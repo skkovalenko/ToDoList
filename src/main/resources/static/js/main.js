@@ -1,3 +1,5 @@
+
+
 $(function(){
 
     const appendTodo = function(data){
@@ -65,6 +67,39 @@ $(function(){
         todoInputValue('', '', '');
         $('#todo-form').css('display', 'flex');
         addingTodo();
+    });
+
+    //Search
+    $('#submit').click(function(){
+        var searchText = $('#search').val();
+        $.ajax({
+            method: "POST",
+            url: '/todo-list/query=' + searchText,
+            success: function(response) {
+                $('#return-todo-list').remove();
+                $('.todo-div').remove();
+                for(i in response){
+                    appendTodo(response[i]);
+                }
+                $('#button-to-return').append('<button id="return-todo-list">Вернуться к списку</button>');
+            }
+        });
+        return false;
+    });
+
+    //Return _todo-list
+    $(document).on('click', '#return-todo-list', function() {
+        $('.todo-div').remove();
+        $('#return-todo-list').remove();
+        $.ajax({
+            method: "GET",
+            url: "/todo-list/",
+            success: function (response) {
+                for(i in response){
+                    appendTodo(response[i]);
+                }
+            }
+        })
     });
 
     //Closing _todo form
